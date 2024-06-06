@@ -49,6 +49,7 @@ class ClientFactory {
         string $applicationSecret = null,
         string $username = null,
         string $password = null,
+        string $apiVersion = '9.0',
         array $services = []
     ): Client {
         $settings = new OnlineSettings();
@@ -58,6 +59,7 @@ class ClientFactory {
         $settings->applicationSecret = $applicationSecret;
         $settings->username = $username;
         $settings->password = $password;
+        $settings->apiVersion = $apiVersion;
 
         if ( isset ( $services['logger'] ) && $services['logger'] instanceof LoggerInterface ) {
             $settings->setLogger( $services['logger'] );
