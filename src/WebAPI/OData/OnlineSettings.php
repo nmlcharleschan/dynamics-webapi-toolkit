@@ -37,6 +37,21 @@ class OnlineSettings extends Settings {
     public ?string $applicationSecret;
 
     /**
+     * Azure AD username.
+     */
+    public ?string $username;
+
+    /**
+     * Azure AD password.
+     */
+    public ?string $password;
+
+    /**
+     * Azure AD grant type.
+     */
+    public string $grantType = 'client_credentials';
+
+    /**
      * Certificate path.
      */
     public string $certificatePath = '';

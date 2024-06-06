@@ -45,13 +45,19 @@ class ClientFactory {
     public static function createOnlineClient(
         string $instanceURI,
         string $applicationID,
-        string $applicationSecret,
+        string $grantType = 'client_credentials',
+        string $applicationSecret = null,
+        string $username = null,
+        string $password = null,
         array $services = []
     ): Client {
         $settings = new OnlineSettings();
         $settings->instanceURI = $instanceURI;
         $settings->applicationID = $applicationID;
+        $settings->grantType = $grantType;
         $settings->applicationSecret = $applicationSecret;
+        $settings->username = $username;
+        $settings->password = $password;
 
         if ( isset ( $services['logger'] ) && $services['logger'] instanceof LoggerInterface ) {
             $settings->setLogger( $services['logger'] );

@@ -155,12 +155,20 @@ class OnlineAuthMiddleware implements AuthMiddlewareInterface {
         try {
             $requestPayload = [
                 'form_params' => [
-                    'grant_type' => 'client_credentials',
+                    'grant_type' => $settings->grantType,
                     'client_id' => $settings->applicationID,
-                    'client_secret' => $settings->applicationSecret,
                     'resource' => $settings->instanceURI,
                 ],
             ];
+
+            if ($settings->grantType == 'client_credentials') {
+                $requestPayload['form_params']['client_secret'] = $settings->applicationSecret;
+            }
+
+            if ($settings->grantType == 'password') {
+                $requestPayload['form_params']['username'] = $settings->username;
+                $requestPayload['form_params']['password'] = $settings->password;
+            }
 
 	        // Add and remove unnecessary params for certificate-based auth
 	        if ( $this->settings->isCertificateBasedAuth() ) {
